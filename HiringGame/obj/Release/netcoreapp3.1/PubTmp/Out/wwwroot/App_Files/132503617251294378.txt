@@ -1,0 +1,13 @@
+git remote add origin http://webtest.minapharm.com:808/DefaultCollection/SmartFlowProject/_git/SmartFlowProject
+git push -u origin --all
+
+1086
+michael2013
+
+
+
+App SID:	29cad967-89a8-440d-ae88-3caf88f3bf21
+App Key:	f2e11bf487a048321d376c38873e8fea
+Default storage:	SmartFlow
+
+65

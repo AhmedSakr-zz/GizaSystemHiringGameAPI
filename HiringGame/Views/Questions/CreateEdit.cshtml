@@ -1,0 +1,258 @@
+﻿
+@{
+    ViewData["Title"] = Model.Id == null ? "Create Question" : "Edit Question";
+}
+@using HiringGame.Application.Interfaces
+@model HiringGame.Application.Dtos.QuestionDto
+@inject IJobServices JobServices;
+
+@{
+    var jobs = JobServices.GetList();
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">@(Model.Id == null ? "Create Question" : "Edit Question")</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active"><a asp-controller="Questions" asp-action="Index"> Questions</a></li>
+
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form asp-controller="Questions" asp-action="@(Model.Id==null?"create":"Edit")" method="post">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="m-0">@(Model.Id == null ? "Create Question" : "Edit Question") </h5>
+                                <a style="float:right" asp-controller="Questions" asp-action="Index" asp-route-typeId="@Model.QuestionTypeId" class="btn btn-primary">Questions list</a>
+                            </div>
+                            <div class="card-body">
+
+
+                                <input type="hidden" asp-for="Id" />
+                                <input type="hidden" asp-for="CreatedById" />
+                                <input type="hidden" asp-for="CreatedDate" />
+                                <input type="hidden" asp-for="UpdatedById" />
+                                <input type="hidden" asp-for="UpdatedDate" />
+                                <input type="hidden" asp-for="DeletedById" />
+                                <input type="hidden" asp-for="DeletedDate" />
+                                <input type="hidden" asp-for="QuestionTypeId" />
+
+                                <div class="form-group">
+                                    <label asp-for="QuestionString"></label>
+                                    <input asp-for="QuestionString" class="form-control" placeholder="Question" />
+                                    <span asp-validation-for="QuestionString" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" asp-for="IsActive" checked="@Model.IsActive" />
+                                    <label class="form-check-label">Active</label>
+                                </div>
+
+                                <hr />
+                                <br />
+                                <h5 class="m-0">Answers </h5>
+
+                                <input type="button" class="btn btn-info float-right  " style="margin-bottom: 10px;" value="Add Answer" id="btnAddAnswer" />
+                                <br />
+
+                                <table class="table table-bordered" style="width: 100%">
+                                    <tbody id="tbodyAnswers">
+
+
+                                        @for (int i = 0; i < Model.Answers.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" asp-for="@Model.Answers[i].Id" />
+                                                    <input asp-for="@Model.Answers[i].AnswerString" class="form-control" placeholder="Answer" />
+                                                    <span asp-validation-for="@Model.Answers[i].AnswerString" class="text-danger"></span>
+
+                                                </td>
+                                                @if (Model.QuestionTypeId == 1)
+                                                {
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" class="form-check-input" asp-for="@Model.Answers[i].IsCorrectAnswer" checked="@Model.Answers[i].IsCorrectAnswer" />
+                                                            <label class="form-check-label">The correct answer</label>
+                                                        </div>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        <select class="form-control" asp-for="@Model.Answers[i].PersonalityKey">
+                                                            <option value="">-- Select --</option>
+
+                                                            @if (Model.Answers[i].PersonalityKey == "D")
+                                                            {
+                                                                <option value="D" selected>D</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="D">D</option>
+                                                            }
+
+                                                            @if (Model.Answers[i].PersonalityKey == "I")
+                                                            {
+                                                                <option value="I" selected>I</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="I">I</option>
+                                                            }
+
+                                                            @if (Model.Answers[i].PersonalityKey == "S")
+                                                            {
+                                                                <option value="S" selected>S</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="S">S</option>
+                                                            }
+
+                                                            @if (Model.Answers[i].PersonalityKey == "C")
+                                                            {
+                                                                <option value="C" selected>C</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="C">C</option>
+                                                            }
+
+                                                        </select>
+                                                    </td>
+                                                }
+
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" asp-for="@Model.Answers[i].IsActive" checked="@Model.Answers[i].IsActive" />
+                                                        <label class="form-check-label">Active</label>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <input type="button" class="btn btn-danger deleteRow" value="Delete" />
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <div class="card-footer">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <input type="submit" value="Submit" class="btn btn-success" />
+                                <a class="btn btn-default" asp-controller="Questions" asp-action="Index" asp-route-typeId="@Model.QuestionTypeId">Cancel</a>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.col-md-6 -->
+                <!-- /.col-md-6 -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+</div>
+
+@section Scripts
+{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $answerCount=@Model.Answers.Count;
+
+            $("#btnAddAnswer").click(function() {
+                var $newRow = "";
+
+                $newRow += '<tr>';
+                $newRow += '<td>';
+                $newRow += '<input type="hidden" data-val="true" data-val-required="The Id field is required." id="Answers_' + $answerCount + '__Id" name="Answers[' + $answerCount + '].Id" value="0">';
+                $newRow += '<input class="form-control" placeholder="Answer" type="text" id="Answers_' + $answerCount + '__AnswerString" name="Answers[' + $answerCount +'].AnswerString" >';
+                $newRow += '<span class="text-danger field-validation-valid" data-valmsg-for="Answers[' + $answerCount +'].AnswerString" data-valmsg-replace="true"></span>';
+                $newRow += '</td>';
+                if (@Model.QuestionTypeId  === 1) {
+                    $newRow += '<td>';
+                    $newRow += '<div class="form-check">';
+                    $newRow +='<input type="checkbox" class="form-check-input"  data-val="true" data-val-required="The IsCorrectAnswer field is required." id="Answers_' + $answerCount +'__IsCorrectAnswer" name="Answers[' +
+                    $answerCount +'].IsCorrectAnswer" value="true">';
+                    $newRow += '<label class="form-check-label">The correct answer</label>';
+                    $newRow += '</div>';
+                    $newRow += '</td>';
+                } else {
+
+                    $newRow += '<td>';
+                    $newRow += ' <select class="form-control" id="Answers_' + $answerCount +'__PersonalityKey" name="Answers[' +$answerCount +'].PersonalityKey" >';
+                    $newRow += ' <option value="">-- Select --</option>';
+                    $newRow += '<option value="D">D</option>';
+                    $newRow += '<option value="I">I</option>';
+                    $newRow += '<option value="S">S</option>';
+                    $newRow += '<option value="C">C</option>';
+                    $newRow += '</select>';
+                    $newRow += '</td>';
+                }
+                $newRow += '<td>';
+                $newRow += '<div class="form-check">';
+                $newRow += '<input type="checkbox" class="form-check-input" checked="checked" data-val="true" data-val-required="The IsActive field is required." id="Answers_' + $answerCount + '__IsActive" name="Answers[' + $answerCount +'].IsActive" value="true">';
+                $newRow += '<label class="form-check-label">Active</label>';
+                $newRow += '</div>';
+                $newRow += '</td>';
+                $newRow += '<td>';
+                $newRow += '<input type="button" class="btn btn-danger deleteRow" value="Delete">';
+                $newRow += '</td>';
+
+                $newRow += '</tr>';
+
+                $("#tbodyAnswers").append($newRow);
+
+                $answerCount = $answerCount + 1;
+            });
+
+            //$(".deleteRow").click(function () {
+            $(document).on("click", ".deleteRow", function () {
+
+
+
+                if ($('#tbodyAnswers tr').length > 0) {
+                    $(this).closest("tr").remove();
+
+                    $answerCount = 0;
+
+                    $('#tbodyAnswers tr').each(function () {
+                        var this_row = $(this);
+
+                        this_row.find('input[name$=".Id"]').attr('name', 'Answers[' + $answerCount + '].Id').attr('id', 'Answers_' + $answerCount + '__Id');
+                        this_row.find('input[name$=".AnswerString"]').attr('name', 'Answers[' + $answerCount + '].AnswerString').attr('id', 'Answers_' + $answerCount + '__AnswerString');
+                        this_row.find('.text-danger').attr('data-valmsg-for', 'Answers[' + $answerCount + '].AnswerString');
+                        this_row.find('input[name$=".IsCorrectAnswer"]').attr('name', 'Answers[' + $answerCount + '].IsCorrectAnswer').attr('id', 'Answers_' + $answerCount + '__IsCorrectAnswer');
+                        this_row.find('select[name$=".PersonalityKey"]').attr('name', 'Answers[' + $answerCount + '].PersonalityKey').attr('id', 'Answers_' + $answerCount + '__PersonalityKey');
+                        this_row.find('input[name$=".IsActive"]').attr('name', 'Answers[' + $answerCount + '].IsActive').attr('id', 'Answers_' + $answerCount + '__IsActive');
+
+                        $answerCount ++;
+                    });
+                }
+            });
+        });
+    </script>
+}
+

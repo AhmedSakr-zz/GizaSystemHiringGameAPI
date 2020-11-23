@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewData["Title"] = Model.Id == null ? "Create Job" : "Edit Job";
+}
+@model HiringGame.Application.Dtos.JobDto
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">@(Model.Id == null ? "Create Job" : "Edit Job")</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active"><a asp-controller="Jobs" asp-action="Index"> Categories</a></li>
+
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <form asp-controller="Jobs" asp-action="@(Model.Id==null?"create":"Edit")" method="post">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="m-0">@(Model.Id == null ? "Create Job" : "Edit Job") </h5>
+                                <a style="float:right" asp-controller="Jobs" asp-action="Index" class="btn btn-primary">Jobs list</a>
+                            </div>
+                            <div class="card-body">
+
+                                <input type="hidden" asp-for="Id" />
+                                <input type="hidden" asp-for="CreatedById" />
+                                <input type="hidden" asp-for="CreatedDate" />
+                                <input type="hidden" asp-for="UpdatedById" />
+                                <input type="hidden" asp-for="UpdatedDate" />
+                                <input type="hidden" asp-for="DeletedById" />
+                                <input type="hidden" asp-for="DeletedDate" />
+
+                                <div class="form-group">
+                                    <label asp-for="Name"></label>
+                                    <input asp-for="Name" class="form-control" placeholder="Job Name" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" asp-for="IsActive" checked="@Model.IsActive" />
+                                    <label class="form-check-label">Active</label>
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <input type="submit" value="Submit" class="btn btn-success" />
+                                <a class="btn btn-default" asp-controller="Jobs" asp-action="Index">Cancel</a>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.col-md-6 -->
+                <!-- /.col-md-6 -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+</div>
+
+@section Scripts
+{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+
+}
+

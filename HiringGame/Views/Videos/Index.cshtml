@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewData["Title"] = "Game Videos";
+     
+}
+@model IList<HiringGame.Application.Dtos.VideoDto>
+<!-- DataTables -->
+<link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Videos List</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">Videos</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+                        <div class="card-header">
+
+                            
+                            <a style="float:right" asp-controller="Videos" asp-action="Create" class="btn btn-primary">Add New</a>
+                        </div>
+                        <div class="card-body">
+                            
+                            
+                            <table id="tableData" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Download</th>
+                                    <th>Status</th>
+                                    <th>Edit</th>
+                                </tr>
+
+                                </thead>
+                                <tbody>
+                                @foreach (var video in Model)
+                                {
+                                    <tr>
+                                        <td>@video.Id</td>
+                                        <td>@video.Name</td>
+                                        <td> <a href="/App_Files/@video.PhysicalName" name="@video.VirtualName">@video.VirtualName</a></td>
+                                        <td>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" disabled="disabled" checked="@video.IsActive">
+                                                <label class="form-check-label">Active</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Videos" asp-action="Edit" asp-route-id="@video.Id" class="btn  bg-gradient-success">Edit</a>
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.col-md-6 -->
+                <!-- /.col-md-6 -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+</div>
+
+
+
+@section Scripts
+{
+    <!-- DataTables -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+    <script>
+        $(function () {
+
+            $('#tableData').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
+            });
+        });
+    </script>
+}

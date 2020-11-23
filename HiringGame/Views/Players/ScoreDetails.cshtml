@@ -1,0 +1,156 @@
+﻿@{
+    ViewData["Title"] = "Score Details";
+}
+@model HiringGame.Application.Dtos.PlayerScoreDto
+    <!-- DataTables -->
+<link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+<style>
+    .firstTd {
+        background: rgba(0,0,0,.05);
+        font-weight: bold;
+    }
+</style>
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Score Details</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active"><a asp-controller="Players" asp-action="Index"> Players</a></li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="m-0">Player Details </h5>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td class="firstTd">Player Name:</td>
+                                    <td>@(Model.Player.FirstName + " " + Model.Player.LastName)</td>
+                                    <td class="firstTd">Player Id:</td>
+                                    <td>@Model.Player.Id</td>
+                                </tr>
+                                <tr>
+                                    <td class="firstTd">Email:</td>
+                                    <td>@Model.Player.EmailAddress</td>
+                                    <td class="firstTd">Mobile:</td>
+                                    <td>@Model.Player.MobileNo</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="firstTd">Job:</td>
+                                    <td>@Model.Player.JobName</td>
+                                    <td class="firstTd">Score:</td>
+                                    <td>@Model.Player.Score</td>
+                                </tr>
+                                <tr>
+
+                                    <td class="firstTd">Registration Date:</td>
+                                    <td>@Model.Player.CreatedDate</td>
+                                    <td class="firstTd">
+                                        <span>Personality</span>
+                                    </td>
+                                    <td>
+                                        @{
+                                            var discResult = Model.DiscResults.Aggregate("", (current, item) => current + (item.PersonalityKey + " = " + item.Score + " , "));
+                                            discResult = discResult.Substring(0, discResult.Length - 2);
+                                        }
+                                        <span style="font-weight: bold">@discResult</span>
+                                    </td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+                        <div class="card-body">
+
+
+                            <h5 class="m-0">Score Details </h5>
+                            <table id="tableData" class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+
+                                        <th>Question</th>
+                                        <th>Player Answer</th>
+                                        <th>Status</th>
+                                        <th>Score</th>
+                                        <th>Answer Time</th>
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @foreach (var transaction in Model.Transactions)
+                                    {
+                                        <tr>
+
+                                            <td>@transaction.Question</td>
+                                            <td>@transaction.Answer</td>
+                                            <td>
+                                                <span class=" @(transaction.IsCorrect ? "text-success" : "text-danger")">
+                                                    @(transaction.IsCorrect ? "Correct Answer" : "Wrong Answer")
+                                                </span>
+                                            </td>
+                                            <td>@transaction.Score</td>
+                                            <td>@transaction.CreatedDate</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.col-md-6 -->
+                <!-- /.col-md-6 -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+</div>
+
+
+
+@section Scripts
+{
+    <!-- DataTables -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+    <script>
+        $(function () {
+
+            $('#tableData').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
+            });
+        });
+    </script>
+}
