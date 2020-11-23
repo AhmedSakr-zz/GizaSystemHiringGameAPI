@@ -84,12 +84,25 @@ namespace HiringGame.Application.Services
             {
                 var player = _mapper.Map<Player>(dto);
 
-                var alreadyExist = _dbContext.Players.FirstOrDefault(t => t.MobileNo == player.MobileNo);
+                var alreadyExist = _dbContext.Players.Include(t => t.Transactions).ThenInclude(t => t.Answer)
+                    .ThenInclude(t => t.Question).FirstOrDefault(t => t.EmailAddress == player.EmailAddress);
 
                 if (alreadyExist != null)
                 {
-                    clientMessage.ReturnedData = new RegistrationResult { PlayerId = alreadyExist.Id, NewPlayer = false };
-                    clientMessage.ClientStatusCode = DataEnum.OperationStatus.Ok;
+
+                    var personalityQuestions = alreadyExist.Transactions.Select(t => t.Answer.Question)
+                        .Where(t => t.QuestionTypeId == (int)AppEnum.QuestionTypes.Level_3).Select(t => t.Id).Distinct();
+                    if (personalityQuestions.Count() == 7)
+                    {
+                        clientMessage.ReturnedData = new RegistrationResult { PlayerId = alreadyExist.Id, NewPlayer = false };
+                        clientMessage.ClientStatusCode = DataEnum.OperationStatus.Ok;
+                        return clientMessage;
+                    }
+                    else
+                    {
+                        _dbContext.Players.Remove(alreadyExist);
+                        _dbContext.SaveChanges();
+                    }
 
                 }
 

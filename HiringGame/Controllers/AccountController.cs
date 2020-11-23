@@ -182,8 +182,6 @@ namespace HiringGame.Controllers
             return View();
         }
 
-
-
         public async Task<IActionResult> seedingadmins()
         {
             var user = new AppUser
@@ -196,5 +194,47 @@ namespace HiringGame.Controllers
             var result = await _userManager.CreateAsync(user, "Admin@123");
             return Json("Done");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var model = new ChangePasswordViewModel
+            {
+                EmailAddress = user.UserName
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var result = await _userManager.ResetPasswordAsync(user, token, model.Password);
+            if (result.Succeeded)
+            {
+                TempData["clientMessage"] =
+                    Helper.PrepareClientMessage("Your password changed successfully.",
+                        DataEnum.ClientMessageType.Success);
+                return View(model);
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+
+            return View(model);
+        }
     }
+
+
 }
