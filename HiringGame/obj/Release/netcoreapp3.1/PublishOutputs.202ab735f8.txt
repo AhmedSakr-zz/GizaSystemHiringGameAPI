@@ -3,6 +3,7 @@ D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\
 D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\App_Files\132503617251294378.txt
 D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\App_Files\3ac5f874-79ce-44f3-a37e-a0b025d8ff36.png
 D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\site.css
+D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\debug.log
 D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\dist\css\adminlte.css
 D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\dist\css\adminlte.css.map
 D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\dist\css\adminlte.min.css

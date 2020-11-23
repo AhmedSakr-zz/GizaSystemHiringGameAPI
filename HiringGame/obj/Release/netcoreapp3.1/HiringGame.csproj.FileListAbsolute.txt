@@ -175,3 +175,4 @@ D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\
 D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\Release\netcoreapp3.1\scopedcss\bundle\HiringGame.styles.css
 D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\Release\netcoreapp3.1\Razor\Views\Videos\CreateEdit.cshtml.g.cs
 D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\Release\netcoreapp3.1\Razor\Views\Videos\Index.cshtml.g.cs
+D:\Applications\AhmedSakr.VisualStudio.net\HiringGame\HiringGame\HiringGame\obj\Release\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs

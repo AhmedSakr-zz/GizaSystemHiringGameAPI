@@ -19,7 +19,7 @@ namespace HiringGame.Application.Services
 
         public async Task<bool> SendMailAsync(SendMailParamsDto dto)
         {
-            var msg = new MailMessage { From = new MailAddress("Web@minapharm.com", "MINAPHARM Web Services") };
+            var msg = new MailMessage { From = new MailAddress(_configuration["EmailSetting:UserName"], "Giza Systems Web Services") };
 
             foreach (var to in dto.ToList)
             {

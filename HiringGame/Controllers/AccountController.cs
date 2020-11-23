@@ -198,6 +198,10 @@ namespace HiringGame.Controllers
         [HttpGet]
         public async Task<IActionResult> ChangePassword()
         {
+            if (User?.Identity == null)
+            {
+                return RedirectToAction("LogOut");
+            }
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var model = new ChangePasswordViewModel
             {

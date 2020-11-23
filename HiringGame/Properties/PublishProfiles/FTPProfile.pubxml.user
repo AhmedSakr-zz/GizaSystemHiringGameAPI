@@ -11,7 +11,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>11/21/2020 19:53:56</publishTime>
+      <publishTime>11/23/2020 18:53:51</publishTime>
     </File>
     <File Include="appsettings.json">
       <publishTime>11/22/2020 13:48:55</publishTime>
@@ -74,25 +74,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
     <File Include="HiringGame.deps.json">
-      <publishTime>11/22/2020 20:46:35</publishTime>
+      <publishTime>11/23/2020 19:44:46</publishTime>
     </File>
     <File Include="HiringGame.dll">
-      <publishTime>11/22/2020 20:46:31</publishTime>
+      <publishTime>11/23/2020 19:44:43</publishTime>
     </File>
     <File Include="HiringGame.exe">
-      <publishTime>11/22/2020 20:46:31</publishTime>
+      <publishTime>11/23/2020 19:44:43</publishTime>
     </File>
     <File Include="HiringGame.pdb">
-      <publishTime>11/22/2020 20:46:31</publishTime>
+      <publishTime>11/23/2020 19:44:43</publishTime>
     </File>
     <File Include="HiringGame.runtimeconfig.json">
       <publishTime>11/17/2020 09:05:29</publishTime>
     </File>
     <File Include="HiringGame.Views.dll">
-      <publishTime>11/22/2020 20:46:33</publishTime>
+      <publishTime>11/23/2020 19:44:44</publishTime>
     </File>
     <File Include="HiringGame.Views.pdb">
-      <publishTime>11/22/2020 20:46:33</publishTime>
+      <publishTime>11/23/2020 19:44:44</publishTime>
     </File>
     <File Include="it/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:09:00</publishTime>
@@ -383,7 +383,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>11/22/2020 20:46:36</publishTime>
+      <publishTime>11/23/2020 19:44:47</publishTime>
     </File>
     <File Include="wwwroot/App_Files/132503604649036795..png">
       <publishTime>11/20/2020 17:41:16</publishTime>
@@ -396,6 +396,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="wwwroot/css/site.css">
       <publishTime>09/16/2020 21:31:11</publishTime>
+    </File>
+    <File Include="wwwroot/debug.log">
+      <publishTime>11/23/2020 19:05:11</publishTime>
     </File>
     <File Include="wwwroot/dist/css/adminlte.css">
       <publishTime>09/19/2020 21:36:09</publishTime>
