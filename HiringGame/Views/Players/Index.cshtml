@@ -63,7 +63,7 @@
                                         <td>@player.EmailAddress</td>
                                         <td>@player.MobileNo</td>
                                         <td>@player.JobName</td>
-                                        <td>@player.Score</td>
+                                        <td>@player.TotalScore</td>
                                         <td>@player.CreatedDate.Value.ToShortDateString()</td>
                                         <td>
                                             <a asp-controller="Players" asp-action="ScoreDetails" asp-route-playerId="@player.Id" class="btn  bg-gradient-success">Score Details</a>
@@ -103,7 +103,7 @@
                     "paging": true,
                     "lengthChange": false,
                     "searching": true,
-                    "ordering": true,
+                    "ordering": false,
                     "info": true,
                     "autoWidth": false,
                     "responsive": true

@@ -27,7 +27,7 @@ namespace HiringGame.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = _playerServices.GetList();
+            var model = _playerServices.GetList().OrderBy(t => t.Score).ToList().OrderByDescending(t => t.TotalScore).ToList();
             return View(model);
         }
 
@@ -47,7 +47,7 @@ namespace HiringGame.Controllers
 
         public IActionResult TopScore()
         {
-            var model = _playerServices.GetList().OrderBy(t => t.Score).ToList();
+            var model = _playerServices.GetList().OrderBy(t => t.Score).ToList().OrderByDescending(t=>t.TotalScore).ToList();
             return View(model);
         }
     }

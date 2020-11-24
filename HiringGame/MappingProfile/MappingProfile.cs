@@ -12,11 +12,11 @@ namespace HiringGame.MappingProfile
 {
     public class MappingProfile : Profile
     {
-         
+
 
         public MappingProfile()
         {
-            
+
             CreateMap<Job, JobDto>();
             CreateMap<JobDto, Job>();
 
@@ -47,7 +47,8 @@ namespace HiringGame.MappingProfile
 
             CreateMap<PlayerForReturnDto, Player>();
             CreateMap<Player, PlayerForReturnDto>()
-                .ForMember(t => t.JobName, opt => opt.MapFrom(s => s.Job.Name));
+                .ForMember(t => t.JobName, opt => opt.MapFrom(s => s.Job.Name))
+                .ForMember(t => t.TotalScore, opt => opt.MapFrom(s => Convert.ToDecimal(s.Score)));
 
 
             CreateMap<Transaction, TransactionDto>();
